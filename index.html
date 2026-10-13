@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<!-- Idioma de la página: español. Ayuda a lectores de pantalla y buscadores -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Hace que la página se adapte a celulares y tabletas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TRENDY: maquillaje y productos de belleza al detal y al por mayor. Conoce el programa Trendymayoristas.">
+  <title>TRENDY | Maquillaje al detal y al por mayor</title>
+
+  <style>
+    /* =====================================================
+       1. VARIABLES DE COLOR Y TIPOGRAFÍA
+       Si quieres cambiar un color, hazlo aquí y se actualiza
+       en toda la página.
+       ===================================================== */
+    :root {
+      --rosa-vibrante: #c2185b;   /* botones y acentos (buen contraste con blanco) */
+      --rosa-pastel:   #ffe3ef;   /* fondos suaves */
+      --rosa-claro:    #fff4f9;   /* fondo general */
+      --lila:          #6d3fa8;   /* títulos secundarios */
+      --lila-pastel:   #eee5f8;   /* fondos alternos */
+      --dorado:        #c9a24a;   /* detalles metalizados (solo decorativo) */
+      --dorado-texto:  #8a6411;   /* dorado oscuro, legible sobre claro */
+      --tinta:         #3a1f3d;   /* color del texto principal */
+      --blanco:        #ffffff;
+
+      --fuente-titulos: Georgia, "Times New Roman", serif;
+      --fuente-texto:   "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* =====================================================
+       2. ESTILOS BASE (se aplican a toda la página)
+       ===================================================== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }   /* desplazamiento suave al usar el menú */
+
+    body {
+      font-family: var(--fuente-texto);
+      color: var(--tinta);
+      background: var(--rosa-claro);
+      line-height: 1.65;
+    }
+
+    h1, h2, h3 { font-family: var(--fuente-titulos); line-height: 1.2; }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--lila); margin-bottom: 0.6rem; }
+    h3 { font-size: 1.3rem; margin-bottom: 0.4rem; }
+    p  { max-width: 65ch; }   /* líneas de lectura cómodas */
+    a  { color: var(--rosa-vibrante); }
+
+    /* Indicador visible al navegar con teclado (accesibilidad) */
+    :focus-visible { outline: 3px solid var(--lila); outline-offset: 3px; }
+
+    /* Enlace "Saltar al contenido" para teclado y lectores de pantalla */
+    .saltar-contenido {
+      position: absolute; left: 0.5rem; top: -4rem;
+      background: var(--tinta); color: var(--blanco);
+      padding: 0.6rem 1rem; border-radius: 0 0 8px 8px; z-index: 100;
+    }
+    .saltar-contenido:focus { top: 0; }
+
+    /* Contenedor que centra el contenido y limita su ancho */
+    .contenedor { width: min(1100px, 92%); margin-inline: auto; }
+
+    /* Espaciado común de cada sección */
+    .seccion { padding: 4.5rem 0; }
+    .seccion-lila { background: var(--lila-pastel); }
+    .seccion-intro { margin-bottom: 2.2rem; }
+
+    /* Botones */
+    .boton {
+      display: inline-block; padding: 0.85rem 1.7rem;
+      border-radius: 999px; font-weight: 700; text-decoration: none;
+      border: 2px solid var(--rosa-vibrante);
+      transition: background 0.2s, color 0.2s;
+    }
+    .boton-principal { background: var(--rosa-vibrante); color: var(--blanco); }
+    .boton-principal:hover { background: var(--tinta); border-color: var(--tinta); }
+    .boton-secundario { background: transparent; color: var(--rosa-vibrante); }
+    .boton-secundario:hover { background: var(--rosa-pastel); }
+
+    /* =====================================================
+       3. ENCABEZADO Y MENÚ DE NAVEGACIÓN
+       ===================================================== */
+    .encabezado {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--blanco);
+      border-bottom: 3px solid var(--dorado);
+    }
+    .encabezado-interno {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.8rem 0;
+    }
+    .logotipo {
+      font-family: var(--fuente-titulos); font-size: 1.9rem; font-weight: 700;
+      letter-spacing: 0.12em; text-decoration: none; color: var(--rosa-vibrante);
+    }
+    .logotipo span { color: var(--dorado-texto); }
+
+    .menu { display: flex; gap: 1.6rem; list-style: none; }
+    .menu a { color: var(--tinta); text-decoration: none; font-weight: 600; padding: 0.3rem 0; }
+    .menu a:hover { color: var(--rosa-vibrante); border-bottom: 2px solid var(--dorado); }
+
+    /* Botón de menú para celulares (oculto en pantallas grandes) */
+    .boton-menu {
+      display: none; background: none; border: 2px solid var(--rosa-vibrante);
+      color: var(--rosa-vibrante); font-size: 1rem; font-weight: 700;
+      padding: 0.45rem 0.9rem; border-radius: 8px; cursor: pointer;
+    }
+
+    /* =====================================================
+       4. SECCIÓN PRINCIPAL (HERO)
+       ===================================================== */
+    .hero {
+      background: linear-gradient(135deg, var(--rosa-pastel) 0%, var(--lila-pastel) 100%);
+      padding: 4.5rem 0;
+    }
+    .hero-interno {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center;
+    }
+    .hero h1 { font-size: clamp(2.2rem, 5.5vw, 3.7rem); color: var(--tinta); margin-bottom: 1rem; }
+    .hero p { font-size: 1.15rem; margin-bottom: 1.8rem; }
+    .hero-botones { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+    /* Paleta de maquillaje dibujada solo con CSS (decorativa) */
+    .paleta {
+      background: var(--blanco); border: 3px solid var(--dorado);
+      border-radius: 28px 28px 28px 8px; padding: 1.4rem;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      box-shadow: 0 14px 30px rgba(109, 63, 168, 0.2);
+      transform: rotate(-3deg);
+    }
+    .paleta-color {
+      aspect-ratio: 1; border-radius: 50%;
+      border: 3px solid var(--dorado);
+      box-shadow: inset 0 -6px 10px rgba(0, 0, 0, 0.12), inset 0 6px 10px rgba(255, 255, 255, 0.5);
+    }
+    .color-1 { background: #f48fb1; }
+    .color-2 { background: #c2185b; }
+    .color-3 { background: #b39ddb; }
+    .color-4 { background: #ffd9e8; }
+    .color-5 { background: #7e57c2; }
+    .color-6 { background: linear-gradient(135deg, #f3d98b, #c9a24a, #f7e7b0); }
+
+    /* =====================================================
+       5. TARJETAS (se usan en productos, ventajas, etc.)
+       ===================================================== */
+    .rejilla {
+      display: grid; gap: 1.4rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));  /* se acomoda sola */
+    }
+    .tarjeta {
+      background: var(--blanco); border-radius: 18px; padding: 1.7rem;
+      border: 1px solid #ecd0e0; border-top: 5px solid var(--rosa-vibrante);
+    }
+    .tarjeta:nth-child(even) { border-top-color: var(--lila); }
+    .icono {
+      display: grid; place-items: center; width: 3.4rem; height: 3.4rem;
+      font-size: 1.7rem; background: var(--rosa-pastel);
+      border-radius: 50%; margin-bottom: 0.9rem;
+    }
+
+    /* =====================================================
+       6. PRESENTACIÓN DE LA EMPRESA
+       ===================================================== */
+    .nosotros-interno { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2.5rem; align-items: start; }
+    .nosotros p + p { margin-top: 1rem; }
+    .datos { list-style: none; background: var(--blanco); border-radius: 18px; padding: 1.6rem; border: 1px solid #ecd0e0; }
+    .datos li { padding: 0.7rem 0; border-bottom: 1px dashed var(--dorado); }
+    .datos li:last-child { border-bottom: none; }
+    .datos strong { color: var(--lila); display: block; }
+
+    /* =====================================================
+       7. SECCIÓN MAYORISTAS
+       ===================================================== */
+    .mayoristas {
+      background: var(--tinta); color: var(--blanco);
+      border-radius: 28px; padding: 3rem; border: 3px solid var(--dorado);
+    }
+    .mayoristas h2 { color: #f3d98b; }
+    .mayoristas ul { margin: 1.2rem 0 1.8rem 1.2rem; }
+    .mayoristas li { margin-bottom: 0.4rem; }
+    .mayoristas .boton-principal { background: #f3d98b; color: var(--tinta); border-color: #f3d98b; }
+    .mayoristas .boton-principal:hover { background: var(--blanco); border-color: var(--blanco); }
+
+    /* =====================================================
+       8. CONTACTO Y FORMULARIO
+       ===================================================== */
+    .contacto-interno { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .aviso-demo {
+      background: #fff3cd; color: #5c4400; border-left: 5px solid var(--dorado);
+      padding: 0.8rem 1rem; border-radius: 8px; margin-bottom: 1.2rem; font-size: 0.95rem;
+    }
+    .formulario label { display: block; font-weight: 600; margin: 0.9rem 0 0.3rem; }
+    .formulario input, .formulario textarea {
+      width: 100%; padding: 0.75rem; font: inherit; color: var(--tinta);
+      border: 2px solid #b79bc9; border-radius: 10px; background: var(--blanco);
+    }
+    .formulario textarea { min-height: 120px; resize: vertical; }
+    .formulario .boton { margin-top: 1.2rem; cursor: pointer; font-size: 1rem; }
+    .mensaje-demo { margin-top: 1rem; font-weight: 600; color: var(--lila); }
+    .lista-contacto { list-style: none; }
+    .lista-contacto li { margin-bottom: 1rem; }
+    .lista-contacto strong { display: block; color: var(--lila); }
+
+    /* =====================================================
+       9. PIE DE PÁGINA
+       ===================================================== */
+    .pie { background: var(--tinta); color: #f1e4f1; padding: 2.5rem 0; border-top: 4px solid var(--dorado); }
+    .pie-interno { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center; }
+    .pie a { color: #f3d98b; }
+    .pie-enlaces { list-style: none; display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    .pie small { display: block; margin-top: 1.5rem; opacity: 0.85; }
+
+    /* =====================================================
+       10. DISEÑO ADAPTABLE (tabletas y celulares)
+       ===================================================== */
+    @media (max-width: 860px) {
+      .hero-interno, .nosotros-interno, .contacto-interno { grid-template-columns: 1fr; }
+      .paleta { max-width: 340px; margin-inline: auto; }
+      .boton-menu { display: block; }
+      .menu {
+        display: none; flex-direction: column; gap: 0.4rem;
+        position: absolute; left: 0; right: 0; top: 100%;
+        background: var(--blanco); padding: 1rem 4%; border-bottom: 3px solid var(--dorado);
+      }
+      .menu.abierto { display: flex; }
+      .mayoristas { padding: 2rem 1.4rem; }
+    }
+
+    /* Respeta a quienes prefieren menos movimiento */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===== ENCABEZADO: logotipo y menú ===== -->
+  <header class="encabezado">
+    <div class="contenedor encabezado-interno">
+      <a class="logotipo" href="#inicio" aria-label="TRENDY, ir al inicio">TREND<span>Y</span></a>
+
+      <button class="boton-menu" id="boton-menu" aria-expanded="false" aria-controls="menu-principal">Menú</button>
+
+      <nav aria-label="Navegación principal">
+        <ul class="menu" id="menu-principal">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#mayoristas">Mayoristas</a></li>
+          <li><a href="#ventajas">Ventajas</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ===== INICIO ===== -->
+    <section class="hero" id="inicio">
+      <div class="contenedor hero-interno">
+        <div>
+          <h1>Maquillaje que va con tu estilo, a tu precio.</h1>
+          <p>En TRENDY encuentras labiales, bases, sombras y más. Compra para ti o únete a Trendymayoristas y empieza a vender.</p>
+          <div class="hero-botones">
+            <a class="boton boton-principal" href="#productos">Ver productos</a>
+            <a class="boton boton-secundario" href="#mayoristas">Quiero ser mayorista</a>
+          </div>
+        </div>
+        <!-- Imagen decorativa: aria-hidden evita que el lector de pantalla la lea -->
+        <div class="paleta" aria-hidden="true">
+          <div class="paleta-color color-1"></div>
+          <div class="paleta-color color-2"></div>
+          <div class="paleta-color color-3"></div>
+          <div class="paleta-color color-4"></div>
+          <div class="paleta-color color-5"></div>
+          <div class="paleta-color color-6"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NOSOTROS ===== -->
+    <section class="seccion" id="nosotros" aria-labelledby="titulo-nosotros">
+      <div class="contenedor nosotros-interno">
+        <div>
+          <h2 id="titulo-nosotros">Quiénes somos</h2>
+          <p>TRENDY comercializa, distribuye y vende productos de belleza, cosméticos y artículos de cuidado personal, con el maquillaje como protagonista.</p>
+          <p>Atendemos a quienes aman maquillarse, a creadoras de contenido de belleza y a emprendedoras que quieren generar ingresos revendiendo productos. Vendemos por unidad y por volumen.</p>
+        </div>
+        <ul class="datos">
+          <li><strong>Qué hacemos</strong>Comercialización y distribución de belleza</li>
+          <li><strong>Cómo vendemos</strong>Al por menor y al por mayor</li>
+          <li><strong>A quién atendemos</strong>Amantes del maquillaje, creadoras de contenido y emprendedoras</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== PRODUCTOS ===== -->
+    <section class="seccion seccion-lila" id="productos" aria-labelledby="titulo-productos">
+      <div class="contenedor">
+        <div class="seccion-intro">
+          <h2 id="titulo-productos">Nuestro maquillaje</h2>
+          <p>Todo lo que necesitas para crear tu look, de la base al brillo final.</p>
+        </div>
+        <div class="rejilla">
+          <article class="tarjeta">
+            <div class="icono" aria-hidden="true">💄</div>
+            <h3>Labios</h3>
+            <p>Labiales, brillos y delineadores en tonos nude, rosados y vibrantes.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono" aria-hidden="true">🎨</div>
+            <h3>Ojos</h3>
+            <p>Paletas de sombras, pestañinas y delineadores para miradas suaves o intensas.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono" aria-hidden="true">✨</div>
+            <h3>Rostro</h3>
+            <p>Bases, correctores, rubores e iluminadores para un acabado uniforme.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono" aria-hidden="true">🖌️</div>
+            <h3>Brochas y accesorios</h3>
+            <p>Brochas, esponjas y organizadores para aplicar y guardar tu maquillaje.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono" aria-hidden="true">🎁</div>
+            <h3>Sets y combos</h3>
+            <p>Kits listos para regalar o para revender, armados con productos que sí se venden.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono" aria-hidden="true">🧴</div>
+            <h3>Cuidado personal</h3>
+            <p>Productos básicos de cuidado de la piel para preparar y mantener tu maquillaje.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MAYORISTAS ===== -->
+    <section class="seccion" id="mayoristas" aria-labelledby="titulo-mayoristas">
+      <div class="contenedor">
+        <div class="mayoristas">
+          <h2 id="titulo-mayoristas">Trendymayoristas</h2>
+          <p>Si quieres vender maquillaje, este programa es para ti. Compras por volumen y revendes con tu propio margen.</p>
+          <ul>
+            <li>Precios de mayorista en cada compra por volumen.</li>
+            <li>Productos de alta rotación para empezar con buen pie.</li>
+            <li>Material visual para compartir en tus redes.</li>
+          </ul>
+          <a class="boton boton-principal" href="#contacto">Pregunta cómo unirte</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VENTAJAS COMPETITIVAS ===== -->
+    <section class="seccion seccion-lila" id="ventajas" aria-labelledby="titulo-ventajas">
+      <div class="contenedor">
+        <div class="seccion-intro">
+          <h2 id="titulo-ventajas">Por qué elegir TRENDY</h2>
+        </div>
+        <div class="rejilla">
+          <article class="tarjeta">
+            <div class="icono" aria-hidden="true">💰</div>
+            <h3>Precios para todos</h3>
+            <p>Tarifa al detal para ti y tarifa mayorista para tu negocio.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono" aria-hidden="true">🌸</div>
+            <h3>Variedad en tendencia</h3>
+            <p>Renovamos el catálogo con los colores y productos que piden tus clientas.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono" aria-hidden="true">🤝</div>
+            <h3>Apoyo a emprendedoras</h3>
+            <p>Te acompañamos para que tu reventa crezca.</p>
+          </article>
+          <article class="tarjeta">
+            <div class="icono" aria-hidden="true">🛍️</div>
+            <h3>Tienda y redes</h3>
+            <p>Estamos donde estés: en tienda física y en redes sociales.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACTO ===== -->
+    <section class="seccion" id="contacto" aria-labelledby="titulo-contacto">
+      <div class="contenedor">
+        <div class="seccion-intro">
+          <h2 id="titulo-contacto">Contáctanos</h2>
+          <p>Escríbenos para comprar, cotizar al por mayor o resolver tus dudas.</p>
+        </div>
+        <div class="contacto-interno">
+
+          <!-- Formulario DEMOSTRATIVO -->
+          <form class="formulario" id="formulario-demo">
+            <p class="aviso-demo" role="note">
+              <strong>Formulario demostrativo:</strong> no envía información. Para recibir mensajes se necesita una integración adicional.
+            </p>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" name="correo" autocomplete="email" required>
+
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" required></textarea>
+
+            <button class="boton boton-principal" type="submit">Enviar mensaje</button>
+            <p class="mensaje-demo" id="mensaje-demo" role="status"></p>
+          </form>
+
+          <!-- Datos ficticios de ejemplo: reemplázalos por los reales de la empresa -->
+          <div>
+            <h3>Datos de contacto</h3>
+            <ul class="lista-contacto">
+              <li><strong>Correo</strong>contacto@ejemplo.com</li>
+              <li><strong>Teléfono / WhatsApp</strong>+00 000 000 0000</li>
+              <li><strong>Tienda</strong>Dirección de ejemplo, Ciudad</li>
+              <li><strong>Horario</strong>Lunes a sábado, 9:00 a. m. a 6:00 p. m.</li>
+              <li><strong>Redes sociales</strong>@trendy_ejemplo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== PIE DE PÁGINA ===== -->
+  <footer class="pie">
+    <div class="contenedor">
+      <div class="pie-interno">
+        <a class="logotipo" href="#inicio" style="color:#f3d98b;" aria-label="TRENDY, volver al inicio">TRENDY</a>
+        <nav aria-label="Navegación del pie de página">
+          <ul class="pie-enlaces">
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#mayoristas">Mayoristas</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+      <small>&copy; 2026 TRENDY. Todos los derechos reservados. Sitio de demostración con datos de ejemplo.</small>
+    </div>
+  </footer>
+
+  <!-- JavaScript mínimo: abre/cierra el menú en celular y simula el envío del formulario -->
+  <script>
+    // --- Menú para celulares ---
+    var botonMenu = document.getElementById("boton-menu");
+    var menu = document.getElementById("menu-principal");
+
+    botonMenu.addEventListener("click", function () {
+      var abierto = menu.classList.toggle("abierto");
+      botonMenu.setAttribute("aria-expanded", abierto);   // informa el estado a lectores de pantalla
+    });
+
+    // Cierra el menú al elegir una opción
+    menu.addEventListener("click", function (e) {
+      if (e.target.tagName === "A") {
+        menu.classList.remove("abierto");
+        botonMenu.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // --- Formulario demostrativo: no envía nada ---
+    document.getElementById("formulario-demo").addEventListener("submit", function (e) {
+      e.preventDefault();   // evita el envío real
+      document.getElementById("mensaje-demo").textContent =
+        "Gracias. Este formulario es solo una demostración y no se envió ningún dato.";
+      this.reset();
+    });
+  </script>
+</body>
+</html>
